@@ -94,7 +94,8 @@
       
           if ((value = $.urlParam(input)) === null) {
             if ($('fieldset.errors').length === 0) {
-              $('form').prepend('<fieldset class="errors"><legend>Errors</legend><ul></ul></fieldset>');
+              // I added tabindex="-1" so JavaScript can move focus to the Errors section
+              $('form').prepend('<fieldset class="errors" tabindex="-1"><legend>Errors</legend><ul></ul></fieldset>');
             }
       
             $referencedElement = null;
@@ -110,7 +111,8 @@
               $referencedElement = $input;
             }
       // R.G. hint: fix next line ;)
-            $error = $('<a>' + message + '</a>');
+            // I added an id to each error message so aria-describedby can connect it to the corresponding field
+            $error = $('<a href="#" id="' + input + '_description">' + message + '</a>');
             $error.click(function (e) {
               // If we rely on the link's href pointing to the input's ID, it doesn't trigger forms mode in screen readers
               $referencedElement.focus();
@@ -121,7 +123,8 @@
       
             if ($(':not(form):focus').length === 0) {
               // See https://stackoverflow.com/questions/46134247/jquery-setting-focus-doesnt-work-in-ie11/
-            
+              // I added focus so the user is taken to the Errors section when the form is submitted with errors
+              $('fieldset.errors').focus();
             }
           } else {
             if ($input.is(':checkbox')) {
@@ -143,7 +146,8 @@
             validateInput('gender', 'Please tell us your gender!');
             validateInput('accept_agbs', 'You must accept our terms and conditions!');
       
-            if ($('.error').length === 0) {
+            // I changed .error to .errors to check if the form has any validation errors
+            if ($('.errors').length === 0) {
               return alert('All inputs are valid.');
             }
           }
