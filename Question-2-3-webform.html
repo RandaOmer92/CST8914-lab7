@@ -27,7 +27,7 @@
     </head>
     <body>
         <h1>Feedback form</h1>
-    <!-- I added instructions to let the user know which fields are required, and I added (required) to each label -->       
+        <!-- I added instructions to let the user know which fields are required, and I added (required) to each label -->       
         <p>Please fill in all fields labeled (required) before submitting the form. </p>   
         <form>
         <div class="control">
@@ -48,14 +48,12 @@
           <legend>Gender <span class="required">(required)</span></legend>
           <div class="control">
             <!-- I added for attribute to the label for the Male gender to connect it to the Male input-->
-            <!-- I added aria-required to let screen readers know that the fields are required -->
-            <input id="gender_male" name="gender" type="radio" value="male" aria-required="true" />
+            <input id="gender_male" name="gender" type="radio" value="male"/>
             <label for="gender_male">Male</label>
           </div>
           <div class="control">
             <!-- I added for attribute to the label for the Female gender to connect it to the Female input-->
-            <!-- I added aria-required to let screen readers know that the fields are required -->
-            <input id="gender_female" name="gender" type="radio" value="female" aria-required="true" />
+            <input id="gender_female" name="gender" type="radio" value="female"/>
             <label for="gender_female">Female</label>
           </div>
         </fieldset>
@@ -97,7 +95,7 @@
               // I added tabindex="-1" so JavaScript can move focus to the Errors section
               $('form').prepend('<fieldset class="errors" tabindex="-1"><legend>Errors</legend><ul></ul></fieldset>');
             }
-      
+            // I removed the extra } bracket, because it was causing the if block to close early 
             $referencedElement = null;
             $elementToDescribe = null;
             $errorContainer = $('fieldset.errors ul');
@@ -111,7 +109,7 @@
               $referencedElement = $input;
             }
       // R.G. hint: fix next line ;)
-            // I added an id to each error message so aria-describedby can connect it to the corresponding field
+            // I added a href and id to each error message so aria-describedby can connect it to the corresponding field
             $error = $('<a href="#" id="' + input + '_description">' + message + '</a>');
             $error.click(function (e) {
               // If we rely on the link's href pointing to the input's ID, it doesn't trigger forms mode in screen readers
